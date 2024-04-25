@@ -1,0 +1,16 @@
+<div class="card bg-light">
+    <div class="card-body">
+        <h6>Form Component</h6>
+        <div class="col-md">
+            <div class="form-floating">
+              <input type="text" class="form-control" [(ngModel)]="customInputNumber">
+              <label for="floatingInputGrid">Enter the Number</label>
+            </div>
+          </div>
+          <select class="form-select mt-2" aria-label="Default select example" [(ngModel)]="actionType">
+            <option value="add">Addition</option>
+            <option value="sub">Subraction</option>
+          </select>
+          <button type="button" class="btn btn-success mt-2" (click)="customCount()">Proceed</button>
+    </div>
+</div>
