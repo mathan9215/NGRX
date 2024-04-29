@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { decrement, increment, reset } from 'src/app/shared/store/counter/counter.actions';
+import { Store, props } from '@ngrx/store';
+import { decrement, increment, reset, titlechange } from 'src/app/shared/store/counter/counter.actions';
+import { countermodel } from 'src/app/shared/store/counter/counter.model';
 
 @Component({
   selector: 'app-counterbutton',
@@ -9,9 +10,11 @@ import { decrement, increment, reset } from 'src/app/shared/store/counter/counte
 })
 export class CounterbuttonComponent {
 
-  constructor(private store:Store<{counter:{counter:number}}>){
+  constructor(private store:Store<{counter:countermodel}>){
 
   }
+ 
+  initTitle!:string;
 
   OnIncrement(){
     this.store.dispatch(increment());
@@ -22,5 +25,17 @@ export class CounterbuttonComponent {
   OnReset(){
     this.store.dispatch(reset());
   }
+  OnChangeTitle(){
+    this.initTitle=getRandomString();
+    this.store.dispatch(titlechange({title:this.initTitle}));
+  }
 
 }
+
+let fruits: string[] = ['NGRX', 'ANGULAR', 'REDUX'];
+
+function getRandomString(): string {
+  const randomIndex = Math.floor(Math.random() * fruits.length);
+  return fruits[randomIndex];
+}
+

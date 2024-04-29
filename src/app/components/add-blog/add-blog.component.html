@@ -1,0 +1,26 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">{{header}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="blogForm">
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Title:</label>
+            <input type="text" class="form-control" formControlName="title">
+            <div class="text-danger" *ngIf="blogForm.controls['title'].invalid && blogForm.controls['title'].touched ">Required</div>
+</div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Description:</label>
+            <input type="text" class="form-control" formControlName="description">
+            <div class="text-danger" *ngIf="blogForm.controls['description'].invalid && blogForm.controls['description'].touched ">Required</div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary active" data-bs-dismiss="modal" (click)="addBlog()" [disabled]="!blogForm.valid">Proceed</button>
+      </div>
+    </div>
+  </div>
