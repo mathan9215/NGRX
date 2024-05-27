@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { deleteBlog, loadBlog } from 'src/app/shared/store/blog/blog.action';
 import { blogModel } from 'src/app/shared/store/blog/blog.model';
 import { getBlogs } from 'src/app/shared/store/blog/blog.selector';
 import { GlobalState } from 'src/app/shared/store/global/global.state';
@@ -19,6 +20,7 @@ export class BlogComponent implements OnInit {
   
 
   ngOnInit(): void {
+    this.store.dispatch(loadBlog())
     this.store.select(getBlogs).subscribe(data => {
       this.blogs=data
     });
@@ -37,6 +39,11 @@ export class BlogComponent implements OnInit {
       };
       this.objectEmitter.emit(data)
     };
+    deleteBlog(blogId:number){
+      if(confirm("Are you confirm to delete?")){
+        this.store.dispatch(deleteBlog({blogId}))
+      }
+    }
 
  
 

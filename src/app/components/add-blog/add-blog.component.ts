@@ -58,7 +58,6 @@ export class AddBlogComponent implements OnInit {
         title: this.blogForm.value.title as string,
         description: this.blogForm.value.description as string
       };
-debugger
       if (Object.keys(this.editData).length !== 0) {
         if (this.editData.isEdit) {
           const _updateBlogInput: blogModel = {

@@ -1,13 +1,23 @@
 import { createReducer, on } from '@ngrx/store';
 import { initialBlogState } from './blog.state';
-import { addNewBlog, allBlogs, loadBlog, updateBlog } from './blog.action';
+import { addNewBlog, allBlogs, deleteBlog, loadBlog, loadBlogSuccess, updateBlog } from './blog.action';
+import { blogModel } from './blog.model';
 
 
 const _blogReducer = createReducer(
   initialBlogState,
   on(loadBlog, (state) => {
+    console.log('load blog()');
     return {
       ...state
+    };
+  }),
+  on(loadBlogSuccess, (state,action) => {
+    console.log('load blog success');
+    
+    return {
+      ...state,
+      bloglist:[...action.bloglist]
     };
   }),
   on(allBlogs, (state,action) => {
@@ -31,6 +41,16 @@ const _blogReducer = createReducer(
       return blog.id===_blog.id?_blog:blog
     })
         return {
+      ...state,
+      bloglist:updatedBlog
+    };
+  }),
+  on(deleteBlog, (state,action) => {
+
+    const updatedBlog=state.bloglist.filter((blog:blogModel)=>{
+      return blog.id !== action.blogId
+    })
+      return {
       ...state,
       bloglist:updatedBlog
     };

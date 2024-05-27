@@ -1,5 +1,6 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,8 @@ import { BlogComponent } from './components/blog/blog.component';
 import { blogReducer } from './shared/store/blog/blog.reducer';
 import { AppState } from './shared/store/global/app.state';
 import { AddBlogComponent } from './components/add-blog/add-blog.component';
+import { EffectsModule } from '@ngrx/effects';
+import { BlogEffects } from './shared/store/blog/blog.effects';
 
 @NgModule({
   declarations: [
@@ -29,10 +32,12 @@ import { AddBlogComponent } from './components/add-blog/add-blog.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     StoreModule.forRoot(AppState),
     FormsModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    EffectsModule.forRoot([BlogEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]
